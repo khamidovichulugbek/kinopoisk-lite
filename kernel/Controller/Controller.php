@@ -6,6 +6,7 @@ use App\Kernel\Http\Redirect;
 use App\Kernel\Http\RedirectInterface;
 use App\Kernel\Http\Request;
 use App\Kernel\Http\RequestInterface;
+use App\Kernel\Session\SessionInterface;
 use App\Kernel\Validation\ValidationInterface;
 use App\Kernel\View\View;
 use App\Kernel\View\ViewInterface;
@@ -15,6 +16,7 @@ abstract class Controller
     private ViewInterface $view;
     private RequestInterface $request;
     private RedirectInterface $redirect;
+    private SessionInterface $session;
 
     public function view(string $path){
 
@@ -40,6 +42,15 @@ abstract class Controller
 
     public function setRedirect(RedirectInterface $redirect): void{
         $this->redirect = $redirect;
+    }
+
+
+    public function session(){
+        return $this->session;
+    }
+
+    public function setSession(SessionInterface $session): void{
+        $this->session = $session;
     }
 
 
