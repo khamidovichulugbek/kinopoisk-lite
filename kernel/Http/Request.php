@@ -9,7 +9,6 @@ class Request implements RequestInterface
 {
 
     private ValidationInterface $validation;
-    private array $errors = [];
 
     public function __construct(
         private array $server,
@@ -47,21 +46,18 @@ class Request implements RequestInterface
         return $this->post[$value] ?? $this->get[$value] ?? null;
     }
 
-    public function validate($rules)
+    public function validate($rules): bool
     {
         $data = [];
 
         foreach ($rules as $key => $rule) {
             $data[$key] = $this->input($key);
         }
-        $validation = $this->validation->validate($data, $rules);
-        if (!$validation) {
-            $this->errors = $this->validation->errors();
-        }
+        return $this->validation->validate($data, $rules);
     }
 
     public function errors()
     {
-        return $this->errors;
+        return $this->validation->errors();
     }
 }

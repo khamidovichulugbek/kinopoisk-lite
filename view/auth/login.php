@@ -39,18 +39,7 @@
 <main class="form-signin w-100 m-auto text-center">
   <form action="/register" method="post">
     <h1 class="h3 mb-3 fw-normal">Please sign up</h1>
-    <div class="form-floating">
-      <input name="name" class="form-control" id="floatingInput" placeholder="name">
-      <label for="floatingInput">Name</label>
-      <?php if ($session->has('name')) { ?>
-        <ul>
-          <?php foreach ($session->getFlash('name') as $error) { ?>
-            <li class="text-danger small"><?php echo $error; ?></li> <?php } ?>
 
-        <?php } ?>
-        </ul>
-
-    </div>
     <div class="form-floating mt-2">
       <input name="email" class="form-control" id="floatingInput" placeholder="name@example.com">
       <label for="floatingInput">Email address</label>
@@ -74,10 +63,6 @@
             <li class="text-danger small"><?php echo $error; ?></li> <?php } ?>
         <?php } ?>
         </ul>
-    </div>
-    <div class="form-floating">
-      <input type="password" name="password_confirmation" class="form-control" placeholder="Confirmation password">
-      <label>Confirmation password</label>
     </div>
 
     <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
