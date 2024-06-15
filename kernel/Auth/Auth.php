@@ -23,23 +23,34 @@ class Auth implements AuthInterface
             $this->username() => $username,
         ]);
 
-        if(!$user){
+        if (!$user) {
             return false;
         }
 
-        if(!password_verify($password, $user[$this->password()])){
+        if (!password_verify($password, $user[$this->password()])) {
             return false;
         }
 
-        if ($user){
+        if ($user) {
             $this->session->set($this->sessionId(), $user['id']);
+            $this->session->set('role', $user['role']);
         }
 
         return true;
     }
 
-    public function check(): bool{
+    public function check(): bool
+    {
         return $this->session->has($this->sessionId());
+    }
+    public function is_admin(): bool
+    {
+        $role = $this->session->get('role');
+        if ($role === 1) {
+            return true;
+        }
+
+        return false;
     }
 
     public function logout()
@@ -47,8 +58,9 @@ class Auth implements AuthInterface
         return $this->session->remove($this->sessionId());
     }
 
-    public function user(){
-        if (!$this->check()){
+    public function user()
+    {
+        if (!$this->check()) {
             return null;
         }
         $user = $this->db->first($this->table(), [
@@ -71,11 +83,13 @@ class Auth implements AuthInterface
         return $this->config->get('auth.username');
     }
 
-    public function password(): string {
+    public function password(): string
+    {
         return $this->config->get('auth.password');
     }
 
-    public function sessionId(){
+    public function sessionId()
+    {
         return $this->config->get('auth.session_field');
     }
 }

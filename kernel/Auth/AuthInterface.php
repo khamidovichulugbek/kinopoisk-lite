@@ -12,5 +12,6 @@ interface AuthInterface{
     public function check(): bool;
     public function user();
     public function logout();
+    public function is_admin(): bool;
 
 }

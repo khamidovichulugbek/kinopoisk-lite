@@ -25,6 +25,9 @@
         </div>
       <?php } else { ?>
         <a href="#" class="text-white m-2"><?php echo $auth->user()->name(); ?> </a>
+        <?php if ($auth->is_admin()) { ?>
+          <a href="#" class="btn btn-primary">Add movies</a>
+        <?php } ?>
         <form action="/logout" method="post">
 
           <button type="sumbit" class="btn btn-danger">Logout</a>
