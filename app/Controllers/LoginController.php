@@ -8,6 +8,8 @@ use App\Kernel\Controller\Controller;
 class LoginController extends Controller
 {
 
+
+
     public function index()
     {
         $this->view('auth/login');
@@ -25,6 +27,11 @@ class LoginController extends Controller
             $this->redirect('/login');
         }
 
+        $this->redirect('/');
+    }
+
+    public function logout(){
+        $this->auth()->logout();
         $this->redirect('/');
     }
 

@@ -19,6 +19,7 @@ use App\Kernel\Session\Session;
 use App\Kernel\Session\SessionInterface;
 use App\Kernel\View\View;
 use App\Kernel\View\ViewInterface;
+use App\Middleware\AuthMiddlewares;
 
 class Container
 {
@@ -43,8 +44,9 @@ class Container
         $this->session = new Session();
         $this->config = new Config();
         $this->database = new Database($this->config);
-        $this->view = new View($this->session);
         $this->auth = new Auth($this->database, $this->session, $this->config);
+        $this->view = new View($this->session, $this->auth);
+
         $this->router = new Router(
             $this->view,
             $this->request,

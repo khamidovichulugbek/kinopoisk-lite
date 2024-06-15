@@ -9,5 +9,8 @@ interface AuthInterface{
     public function table(): string;
     public function username(): string;
     public function password(): string;
+    public function check(): bool;
+    public function user();
+    public function logout();
 
 }

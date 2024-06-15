@@ -5,6 +5,7 @@ namespace App\Kernel\Auth;
 use App\Kernel\Config\ConfigInterface;
 use App\Kernel\Database\DatabaseInterface;
 use App\Kernel\Session\SessionInterface;
+use App\Models\Users;
 
 class Auth implements AuthInterface
 {
@@ -37,7 +38,28 @@ class Auth implements AuthInterface
         return true;
     }
 
+    public function check(): bool{
+        return $this->session->has($this->sessionId());
+    }
 
+    public function logout()
+    {
+        return $this->session->remove($this->sessionId());
+    }
+
+    public function user(){
+        if (!$this->check()){
+            return null;
+        }
+        $user = $this->db->first($this->table(), [
+            'id' => $this->session->get($this->sessionId()),
+        ]);
+        return new Users(
+            id: $user['id'],
+            name: $user['name'],
+            username: $user['email']
+        );
+    }
 
     public function table(): string
     {

@@ -22,9 +22,9 @@ abstract class Controller
     private DatabaseInterface $db;
     private AuthInterface $auth;
 
-    public function view(string $path){
+    public function view(string $path, $data = []){
 
-        return $this->view->page($path);
+        return $this->view->page($path, $data);
     }
 
     public function setView(ViewInterface $view): void
