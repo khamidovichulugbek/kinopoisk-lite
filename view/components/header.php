@@ -18,7 +18,7 @@
         </form>
 
         <div class="text-end">
-          <button type="button" class="btn btn-outline-light me-2">Login</button>
+          <a href="/login" type="button" class="btn btn-outline-light me-2">Login</a>
           <a href="/register" type="button" class="btn btn-warning">Sign-up</a>
         </div>
       </div>

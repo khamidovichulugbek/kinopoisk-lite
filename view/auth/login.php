@@ -37,16 +37,16 @@
 </style>
 
 <main class="form-signin w-100 m-auto text-center">
-  <form action="/register" method="post">
+  <form action="/login" method="post">
     <h1 class="h3 mb-3 fw-normal">Please sign up</h1>
 
     <div class="form-floating mt-2">
       <input name="email" class="form-control" id="floatingInput" placeholder="name@example.com">
       <label for="floatingInput">Email address</label>
-      <?php if ($session->has('email')) { ?>
+      <?php if ($session->has('errors')) { ?>
         <ul>
 
-          <?php foreach ($session->getFlash('email') as $error) { ?>
+          <?php foreach ($session->getFlash('errors') as $error) { ?>
             <li class="text-danger small"><?php echo $error; ?></li> <?php } ?>
         <?php } ?>
         </ul>
@@ -56,13 +56,7 @@
     <div class="form-floating mt-2">
       <input type="password" name="password" class="form-control" placeholder="Password">
       <label>Password</label>
-      <?php if ($session->has('password')) { ?>
-        <ul>
 
-          <?php foreach ($session->getFlash('password') as $error) { ?>
-            <li class="text-danger small"><?php echo $error; ?></li> <?php } ?>
-        <?php } ?>
-        </ul>
     </div>
 
     <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
