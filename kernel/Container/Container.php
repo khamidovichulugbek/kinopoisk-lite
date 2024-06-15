@@ -3,6 +3,8 @@
 namespace App\Kernel\Container;
 
 use App\Kernel\Controller\Controller;
+use App\Kernel\Http\Redirect;
+use App\Kernel\Http\RedirectInterface;
 use App\Kernel\Http\Request;
 use App\Kernel\Http\RequestInterface;
 use App\Kernel\Router\Router;
@@ -15,6 +17,7 @@ class Container
     public readonly RouterInterface $router;
     public readonly ViewInterface $view;
     public readonly RequestInterface $request;
+    public readonly RedirectInterface $redirect;
 
     public function __construct()
     {
@@ -25,6 +28,7 @@ class Container
     {
         $this->view = new View();
         $this->request = Request::createFromGlobals();
-        $this->router = new Router($this->view, $this->request);
+        $this->redirect = new Redirect();
+        $this->router = new Router($this->view, $this->request, $this->redirect);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Kernel\Router;
 
+use App\Kernel\Http\RedirectInterface;
 use App\Kernel\Http\RequestInterface;
 use App\Kernel\View\View;
 use App\Kernel\View\ViewInterface;
@@ -16,6 +17,7 @@ class Router implements RouterInterface
     public function __construct(
         private ViewInterface $view,
         private RequestInterface $request,
+        private RedirectInterface $redirect,
     )
     {
         $this->initRoutes();
@@ -35,6 +37,7 @@ class Router implements RouterInterface
 
             call_user_func([$controller, 'setView'], $this->view);
             call_user_func([$controller, 'setRequest'], $this->request);
+            call_user_func([$controller, 'setRedirect'], $this->redirect);
 
             
             call_user_func([$controller, $action]);
