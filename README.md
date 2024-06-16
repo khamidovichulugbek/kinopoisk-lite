@@ -9,11 +9,14 @@ composer require symfony/var-dumper --dev
 ```
 
 <p>Download for composer</p>
+
 ```
 composer install
 ```
 
-<p>or</p>
+or
+
+
 ```
 composer dump-autoload
 ```
