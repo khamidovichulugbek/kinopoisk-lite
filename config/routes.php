@@ -13,6 +13,8 @@ use App\Middlewares\AdminMiddlewares;
 
 return [
     Route::get('/', [HomeController::class, 'index']),
+    Route::get('/movie', [HomeController::class, 'oneMovie']),
+    Route::post('/movie', [HomeController::class, 'ratingCreate']),
     Route::get('/register', [RegisterController::class, 'index'], [GuestMiddlewares::class]),
     Route::post('/register', [RegisterController::class, 'register']),
     Route::get('/login', [LoginController::class, 'index'], [GuestMiddlewares::class]),
