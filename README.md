@@ -1,5 +1,4 @@
 # kinopoisk-lite
 
 
-[Contribution 
-guidelines for this project](docs/CONTRIBUTING.md)
+<h1>Composer</h1>
