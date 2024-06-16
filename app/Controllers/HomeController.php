@@ -34,6 +34,8 @@ class HomeController extends Controller
         } catch (PDOException $e) {
             $ratings = [];
         }
+        
+        $ratin =  [];
 
         $realrating = 0;
 
