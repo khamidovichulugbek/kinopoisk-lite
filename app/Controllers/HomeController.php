@@ -35,12 +35,15 @@ class HomeController extends Controller
             $ratings = [];
         }
 
-        $ratin =  [];
-        foreach ($ratings as $rating) {
-            $ratin[] = $rating['rating'];
-        }
+        $realrating = 0;
 
-        $realrating = array_sum($ratin) / count($ratin);
+        if (is_array($ratings)){
+            foreach ($ratings as $rating) {
+                $ratin[] = $rating['rating'];
+            }
+            $realrating = array_sum($ratin) / count($ratin);
+    
+        }
 
 
         $this->view('pages/onemovie', [
