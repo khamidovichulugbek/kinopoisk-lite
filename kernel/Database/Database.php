@@ -40,11 +40,60 @@ class Database implements DatabaseInterface
 
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute($conditions);
-        
+
         $result = $stmt->fetch(\PDO::FETCH_ASSOC);
         return $result ?: null;
     }
 
+    public function get(string $table, array $conditions = [])
+    {
+        $where = "";
+
+        if (count($conditions) > 0) {
+            $where = 'WHERE ' . implode(' AND ', array_map(fn ($field) => "$field = :$field", array_keys($conditions)));
+        }
+
+        $sql = "SELECT * FROM $table $where";
+
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute($conditions);
+
+        $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        return $result ?: null;
+    }
+
+    public function update(string $table,array $data, array $conditions = []){
+        $fields = array_keys($data);
+
+        $set = implode(', ', array_map(fn ($field) => "$field = :$field", $fields));
+    
+        $where = '';
+        if (count($conditions) > 0) {
+            $where = 'WHERE ' . implode(' AND ', array_map(fn ($field) => "$field = :$field", array_keys($conditions)));
+        }
+
+        $sql = "UPDATE $table SET $set $where";
+
+        $stmt = $this->pdo->prepare($sql);
+
+        $stmt->execute(array_merge($data, $conditions));
+    }
+
+    public function delete(string $table, array $conditions = [])
+    {
+
+        $where = "";
+
+        if (count($conditions) > 0) {
+            $where = 'WHERE ' . implode(' AND ', array_map(fn ($field) => "$field = :$field", array_keys($conditions)));
+        }
+
+        $sql = "DELETE FROM $table $where";
+
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute($conditions);
+
+    }
     private function connect()
     {
         $driver = $this->config->get('database.driver');
