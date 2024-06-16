@@ -1,5 +1,5 @@
 # kinopoisk-lite
 
 
-For download composer 
-code composer var-autoload
+[Contribution guidelines for this project](docs/CONTRIBUTING.md)
+jjj
