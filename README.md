@@ -16,9 +16,7 @@ composer install
 composer require symfony/var-dumper --dev
 ```
 
-
-
-or
+or autoload
 
 
 ```
