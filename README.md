@@ -2,4 +2,4 @@
 
 
 For download composer 
-composer var-autoload
+/composer var-autoload
