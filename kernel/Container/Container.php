@@ -17,6 +17,8 @@ use App\Kernel\Router\Router;
 use App\Kernel\Router\RouterInterface;
 use App\Kernel\Session\Session;
 use App\Kernel\Session\SessionInterface;
+use App\Kernel\Storage\Storage;
+use App\Kernel\Storage\StorageInterface;
 use App\Kernel\View\View;
 use App\Kernel\View\ViewInterface;
 use App\Middleware\AuthMiddlewares;
@@ -31,6 +33,7 @@ class Container
     public readonly ConfigInterface $config;
     public readonly DatabaseInterface $database;
     public readonly AuthInterface $auth;
+    public readonly StorageInterface $storage;
 
     public function __construct()
     {
@@ -45,8 +48,8 @@ class Container
         $this->config = new Config();
         $this->database = new Database($this->config);
         $this->auth = new Auth($this->database, $this->session, $this->config);
-        $this->view = new View($this->session, $this->auth, $this->request);
-
+        $this->storage = new Storage($this->config);
+        $this->view = new View($this->session, $this->auth, $this->request, $this->storage);
         $this->router = new Router(
             $this->view,
             $this->request,
@@ -54,6 +57,7 @@ class Container
             $this->session,
             $this->database,
             $this->auth,
+            $this->storage
         );
     }
 }

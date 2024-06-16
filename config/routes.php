@@ -4,6 +4,7 @@ use App\Controllers\AdminController;
 use App\Controllers\CategoryController;
 use App\Controllers\HomeController;
 use App\Controllers\LoginController;
+use App\Controllers\MoviesController;
 use App\Controllers\RegisterController;
 use App\Kernel\Router\Route;
 use App\Middlewares\AuthMiddlewares;
@@ -23,4 +24,9 @@ return [
     Route::post('/admin/categories/delete', [CategoryController::class, 'delete'], [AdminMiddlewares::class, AuthMiddlewares::class]),
     Route::get('/admin/categories/update', [CategoryController::class, 'edit'], [AdminMiddlewares::class, AuthMiddlewares::class]),
     Route::post('/admin/categories/update', [CategoryController::class, 'update'], [AdminMiddlewares::class, AuthMiddlewares::class]),
+    Route::get('/admin/movies/create', [MoviesController::class, 'index'], [AdminMiddlewares::class, AuthMiddlewares::class]),
+    Route::post('/admin/movies/create', [MoviesController::class, 'create'], [AdminMiddlewares::class, AuthMiddlewares::class]),
+    Route::post('/admin/movies/delete', [MoviesController::class, 'delete'], [AdminMiddlewares::class, AuthMiddlewares::class]),
+    Route::get('/admin/movies/update', [MoviesController::class, 'edit'], [AdminMiddlewares::class, AuthMiddlewares::class]),
+    Route::post('/admin/movies/update', [MoviesController::class, 'update'], [AdminMiddlewares::class, AuthMiddlewares::class]),
 ];

@@ -2,6 +2,7 @@
 
 namespace App\Kernel\Http;
 
+use App\Kernel\Upload\UploadFile;
 use App\Kernel\Validation\Validation;
 use App\Kernel\Validation\ValidationInterface;
 
@@ -44,6 +45,21 @@ class Request implements RequestInterface
     public function input(string $value)
     {
         return $this->post[$value] ?? $this->get[$value] ?? null;
+    }
+
+    public function file(string $key)
+    {
+        if (!isset($this->files[$key])) {
+            return null;
+        }
+
+        return new UploadFile(
+            $this->files[$key]['name'],
+            $this->files[$key]['type'],
+            $this->files[$key]['tmp_name'],
+            $this->files[$key]['error'],
+            $this->files[$key]['size'],
+        );
     }
 
     public function validate($rules): bool

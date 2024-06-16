@@ -37,10 +37,11 @@
 </style>
 
 <main class="form-signin w-100 m-auto text-center">
-    <form action="/admin/movies/create" method="post" enctype="multipart/form-data">
-        <h1 class="h3 mb-3 fw-normal">Create Movies</h1>
+    <form action="/admin/movies/update" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="id" value="<?php echo $movies['id'] ?>">    
+    <h1 class="h3 mb-3 fw-normal">Update Movies</h1>
         <div class="form-floating">
-            <input name="name" class="form-control" id="floatingInput" placeholder="name">
+            <input name="name" class="form-control" value="<?php echo $movies['name'] ?>" id="floatingInput" placeholder="name">
             <label for="floatingInput">Name</label>
             <?php if ($session->has('name')) { ?>
                 <ul>
@@ -52,7 +53,9 @@
 
         </div>
         <div class="form-floating mt-2">
-            <textarea name="description" class="form-control" placeholder="name"></textarea>
+            <textarea name="description" class="form-control" placeholder="name">
+            <?php echo $movies['description'] ?>"
+            </textarea>
             <label for="floatingInput">Description</label>
             <?php if ($session->has('description')) { ?>
                 <ul>
@@ -67,7 +70,9 @@
             <select class="form-select" name="categoryId" aria-label="Default select example">
                 <option selected>Open this select menu</option>
                 <?php foreach ($categories as $category) { ?>
-                <option value="<?php echo $category->id() ?>"><?php echo $category->name() ?></option>
+                    <option value="<?php echo $category->id() ?>" <?php echo $category->id() === $movies['category_id'] ? 'selected' : '' ?>>
+                        <?php echo $category->name()?>
+                    </option>
                 <?php } ?>
 
             </select>

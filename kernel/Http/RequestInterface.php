@@ -11,4 +11,6 @@ interface RequestInterface
     public function input(string $value);
     public function validate($rules): bool;
     public function errors();
+    public function file(string $key);
+
 }

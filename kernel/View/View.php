@@ -6,6 +6,7 @@ use App\Kernel\Auth\AuthInterface;
 use App\Kernel\Http\RequestInterface;
 use App\Kernel\Session\Session;
 use App\Kernel\Session\SessionInterface;
+use App\Kernel\Storage\StorageInterface;
 use Exception;
 
 class View implements ViewInterface
@@ -14,6 +15,7 @@ class View implements ViewInterface
         private SessionInterface $session,
         private AuthInterface $auth,
         private RequestInterface $request,
+        private StorageInterface $storage,
     ) {
     }
     public function page(string $path, $data = [])
@@ -48,7 +50,8 @@ class View implements ViewInterface
             'view' => $this,
             'session' => $this->session,
             'auth' => $this->auth,
-            'request' => $this->request
+            'request' => $this->request,
+            'storage' => $this->storage
         ];
     }
 }
