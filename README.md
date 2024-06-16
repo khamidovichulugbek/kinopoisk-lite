@@ -9,19 +9,7 @@
 composer install
 ```
 
-<p>Download for Var Dump</p>
 
-
-```
-composer require symfony/var-dumper --dev
-```
-
-or autoload
-
-
-```
-composer dump-autoload
-```
 
 
   
